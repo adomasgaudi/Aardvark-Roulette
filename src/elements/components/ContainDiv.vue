@@ -1,11 +1,5 @@
 <script lang="ts" setup>
 defineProps(["classout", "classin", "pad"]);
-
-// const classout = "";
-// const classin = "";
-// const pad = "";
-
-// console.log(classoutt, classout);
 </script>
 
 <template>
