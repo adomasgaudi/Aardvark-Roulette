@@ -6,7 +6,10 @@ import LogTable from "../components/LogTable.vue";
 import PartDiv from "../components/PartDiv.vue";
 import StatsTable from "../components/StatsTable.vue";
 import UrlForm from "../components/UrlForm.vue";
+import { useUrlData } from "@/utils/stores/urldata";
 import { ref } from "vue";
+const main = useUrlData();
+
 
 const arr = [
   "0",
@@ -93,7 +96,6 @@ const selected = ref(null);
 const selectNumber = (item) => {
   selected.value = item;
 };
-
 </script>
 
 <template>
