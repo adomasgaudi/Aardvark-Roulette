@@ -93,6 +93,7 @@ const selected = ref(null);
 const selectNumber = (item) => {
   selected.value = item;
 };
+
 </script>
 
 <template>
