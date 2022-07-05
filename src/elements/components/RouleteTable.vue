@@ -17,7 +17,7 @@ const rouleteSelect = (item) => {
 </script>
 
 <template>
-  <div class="flex flex-row">
+  <div class="flex flex-row justify-center my-10">
     <button-roulete color="green" @click="rouleteSelect('0')">
       {{ `0` }}
     </button-roulete>

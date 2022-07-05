@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import ContainDiv from "../components/ContainDiv.vue";
-import { ref } from "vue";
-
 import RouleteTable from "../components/RouleteTable.vue";
+import EventTable from "../components/EventTable.vue";
+import LogTable from "../components/LogTable.vue";
+import PartDiv from "../components/PartDiv.vue";
+import StatsTable from "../components/StatsTable.vue";
+import UrlForm from "../components/UrlForm.vue";
+import { ref } from "vue";
 
 const arr = [
   "0",
@@ -93,12 +97,29 @@ const selectNumber = (item) => {
 
 <template>
   <contain-div classin="bg-blue-100" classout="bg-gray-100">
-    <div class="text-xl font-bold fadeInUp p-4">
+    <div class="text-xl font-bold fadeInUp p-4 w-full">
       <h1 class="text-3xl">Welcome to the ardvark roulete game</h1>
+      <p>url</p>
+      <url-form />
+      <p>Stats</p>
+      <stats-table />
       <p>Gameboard</p>
       <roulete-table :arr="arr2" @select="selectNumber" />
       <div>selected: {{ selected }}</div>
-      <p>Events</p>
+      <div class="flex flex-row">
+        <part-div>
+          <div>
+            <p>Events</p>
+            <event-table />
+          </div>
+        </part-div>
+        <part-div>
+          <div>
+            <p>Logs</p>
+            <log-table />
+          </div>
+        </part-div>
+      </div>
     </div>
   </contain-div>
 </template>

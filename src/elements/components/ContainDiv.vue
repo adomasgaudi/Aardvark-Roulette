@@ -9,7 +9,7 @@ defineProps(["classout", "classin", "pad"]);
         class="px-5 sm:px-[5%] md:px-[5%] lg:px-[10%] xl:px-[10%]"
         :class="pad"
       >
-        <div class="flex" :class="classin">
+        <div class="flex w-full" :class="classin">
           <slot />
         </div>
       </div>
