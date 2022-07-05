@@ -1,12 +1,15 @@
 <script lang="ts" setup>
 import { useUrlData } from "@/utils/stores/urldata";
-import { ref } from "vue";
 import { storeToRefs } from "pinia";
-import { onMounted } from "vue";
 
 const main = useUrlData();
 const { data } = storeToRefs(main);
 </script>
+
+<!--  -->
+
+<!--  -->
+
 <template>
   <div>
     <table class="table-auto" v-if="data">
@@ -19,14 +22,15 @@ const { data } = storeToRefs(main);
       <tbody>
         <tr>
           <td
-            v-for="item in data"
+            v-for="item in data.stats"
+            :key="item"
             class="border border-gray-300 text-center bg-gray-200 w-[40px]"
           >
             {{ item.result }}
           </td>
         </tr>
         <tr>
-          <td v-for="item in data">{{ item.count }}</td>
+          <td v-for="item in data.stats" :key="item">{{ item.count }}</td>
         </tr>
       </tbody>
     </table>

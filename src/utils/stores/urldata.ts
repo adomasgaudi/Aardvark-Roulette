@@ -3,7 +3,6 @@ import {defineStore} from 'pinia'
 export const useUrlData = defineStore("main", {
   state: () => ({
     data: null,
-    history: null
   }),
   getters: {
     getData: (state) => {
@@ -14,8 +13,5 @@ export const useUrlData = defineStore("main", {
     async addData(data) {
       this.data = data
     },
-    async addHistory(data) {
-      this.history = data
-    }
   }
 })
