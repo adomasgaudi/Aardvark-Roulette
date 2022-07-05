@@ -6,7 +6,7 @@ defineProps(["classout", "classin", "pad"]);
   <main class="flex justify-center min-h-[800px]" :class="classout">
     <div class="container xl:w-[1124px]">
       <div
-        class="px-5 sm:px-[15%] md:px-[20%] lg:px-[22%] xl:px-[24%]"
+        class="px-5 sm:px-[5%] md:px-[5%] lg:px-[10%] xl:px-[10%]"
         :class="pad"
       >
         <div class="flex" :class="classin">
