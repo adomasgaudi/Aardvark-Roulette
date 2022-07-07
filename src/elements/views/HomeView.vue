@@ -102,7 +102,7 @@ const selectNumber = (item) => {
 
 <template>
   <contain-div classin="" classout=" ">
-    <div class="text-xl font-bold fadeInUp p-4 w-full mb-[200px]">
+    <div class="text-xl fadeInUp p-4 w-full mb-[200px]">
       <h1 class="text-3xl">Roulette table</h1>
       <h1>{{ loading }}</h1>
       <p>url</p>
@@ -120,10 +120,7 @@ const selectNumber = (item) => {
           </div>
         </part-div>
         <part-div>
-          <div>
-            <p>Logs</p>
-            <log-table />
-          </div>
+          <log-table />
         </part-div>
       </div>
     </div>
