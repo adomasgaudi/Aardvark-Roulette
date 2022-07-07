@@ -10,25 +10,21 @@ const greencss = "bg-green-500 hover:bg-green-600";
 const blackcss = "bg-gray-700 hover:bg-gray-900";
 
 onMounted(() => {
-  if (props.data.index == 0) {
-    button.value.style.cssText = ` grid-column-start: 1; grid-row-start: 2; grid-row-end: 4`;
-  }
-  if (props.data.index >= 1 && props.data.index <= 17) {
-    button.value.style.cssText = ` grid-row-start: 1; grid-column-start: ${
-      props.data.index + 1
-    }`;
-  }
-  if (props.data.index == 18) {
-    button.value.style.cssText = ` grid-column-start: 19; grid-row-start: 2; `;
-  }
-  if (props.data.index == 19) {
-    button.value.style.cssText = ` grid-column-start: 19; grid-row-start: 3; `;
-  }
-  if (props.data.index >= 20 && props.data.index <= 36) {
-    button.value.style.cssText = ` grid-row-start: 4; grid-column-start: ${
-      props.data.index - (-1 * 38 + 2 * props.data.index)
-    }`;
-  }
+  // position the tiles
+  const index = props.data.index;
+  const style = button.value.style;
+  const revIndex = (index: number) => index - (-1 * 38 + 2 * index);
+  const forwIndex = (index: number) => index + 1;
+  const grid = (row: number, col: number) =>
+    `grid-row-start: ${row}; grid-column-start: ${col};`;
+
+  if (index == 0) style.cssText = `${grid(2, 1)} grid-row-end: 4;`;
+  if (index >= 1 && index <= 17) style.cssText = `${grid(1, forwIndex(index))}`;
+  if (index == 18) style.cssText = `${grid(2, 19)}`;
+  if (index == 19) style.cssText = `${grid(3, 19)}`;
+  if (index >= 20 && index <= 36) style.cssText = `${grid(4, revIndex(index))}`;
+
+  //
 });
 </script>
 

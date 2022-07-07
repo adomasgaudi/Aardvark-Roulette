@@ -48,11 +48,11 @@ const useUrlData = defineStore("main", {
     },
     
     async getSpin() {
-      console.log('get spin');
+      // console.log('get spin');
       this.startDelta.text = "Spinning the wheel!!"
       await this.pushEventArr(`Game ${this.data.history[0].id.toString().slice(-3)}  ended with: ${this.data.history[0].result}`)
       await setTimeout(async () => {
-        await console.log('now');
+        // await console.log('now');
         await this.getGameById()
         await this.getStatsNext()
         await this.getHistory();
@@ -86,7 +86,7 @@ const useUrlData = defineStore("main", {
         
         this.loading = false
         await this.addData({ ...this.data, next, stats })
-        console.log(next);
+        // console.log(next);
         
         await this.addstartDelta({
           ...this.startDelta,
@@ -96,7 +96,7 @@ const useUrlData = defineStore("main", {
       }
     },
     async getGameById() {
-      console.log('last game');
+      // console.log('last game');
     },
     async getHistory() {
       const [history, error] = await awesome(fetch(`${api}1/history`));
@@ -106,7 +106,7 @@ const useUrlData = defineStore("main", {
       if(error) this.errorText = error.message
     },
     async getSchedule() {
-      console.log('shedule');
+      // console.log('shedule');
     },
 
 

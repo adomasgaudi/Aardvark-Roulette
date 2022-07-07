@@ -8,7 +8,7 @@ const { css } = useCSS();
 const props = defineProps(["color"]);
 
 onMounted(() => {
-  console.log(props);
+  // console.log(props);
 
   button.value.style.cssText = ` background-color: hsl(0, 100%, ${
     100 - props.color * 10
