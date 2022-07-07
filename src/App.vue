@@ -160,6 +160,11 @@ a
   &:active
     @extend .shadow_inset !optional
 
+.shadow_tile
+  box-shadow: rgba(0, 0, 0, 0.2) 0px -3px 0px inset
+
+.shadow_tileTop
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 5px 5px -1px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset
 
 
 //fonts
