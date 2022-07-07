@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import ContainDiv from "../components/ContainDiv.vue";
-import RouleteTable from "../components/RouleteTable.vue";
-import EventTable from "../components/EventTable.vue";
-import LogTable from "../components/LogTable.vue";
+import RouleteTable from "../containers/RouleteTable.vue";
+import EventTable from "../containers/EventTable.vue";
+import LogTable from "../containers/LogTable.vue";
 import PartDiv from "../components/PartDiv.vue";
-import StatsTable from "../components/StatsTable.vue";
-import UrlForm from "../components/UrlForm.vue";
+import StatsTable from "../containers/StatsTable.vue";
+import UrlForm from "../containers/UrlForm.vue";
 import { useUrlData } from "@/utils/stores/useUrlData";
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
@@ -104,24 +104,12 @@ const selectNumber = (item) => {
   <contain-div classin="" classout=" ">
     <div class="text-xl fadeInUp p-4 w-full mb-[200px]">
       <h1 class="text-3xl">Roulette table</h1>
-      <h1>{{ loading }}</h1>
-      <p>url</p>
       <url-form />
-      <p>Stats</p>
       <stats-table />
-      <p>Gameboard</p>
       <roulete-table :arr="arr2" @select="selectNumber" />
-      <div>selected: {{ selected }}</div>
       <div class="flex flex-row">
-        <part-div>
-          <div>
-            <p>Events</p>
-            <event-table />
-          </div>
-        </part-div>
-        <part-div>
-          <log-table />
-        </part-div>
+        <part-div> <event-table /> </part-div>
+        <part-div> <log-table /></part-div>
       </div>
     </div>
   </contain-div>

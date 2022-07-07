@@ -55,6 +55,7 @@ const useUrlData = defineStore("main", {
         await console.log('now');
         await this.getGameById()
         await this.getStatsNext()
+        await this.getHistory();
         this.startDelta.text = ""
         await this.wait()
       }, 3000)

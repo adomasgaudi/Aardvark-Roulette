@@ -17,7 +17,7 @@ const { data, logText } = storeToRefs(main);
 <template>
   <div class="p-2" v-if="logText">
     <p
-      class="text-md pixel text-slate-500 font-thin m-0 px-2 leading-5"
+      class="text-md pixel lighter font-thin m-0 px-2 leading-5"
       v-for="log in logText"
       :key="log"
     >
