@@ -5,6 +5,7 @@ import EventTable from "../containers/EventTable.vue";
 import LogTable from "../containers/LogTable.vue";
 import PartDiv from "../components/PartDiv.vue";
 import StatsTable from "../containers/StatsTable.vue";
+import StatsTable2 from "../containers/StatsTable2.vue";
 import UrlForm from "../containers/UrlForm.vue";
 import { useUrlData } from "@/utils/stores/useUrlData";
 import { ref } from "vue";
@@ -95,7 +96,7 @@ const arr2 = [
 
 const selected = ref(null);
 
-const selectNumber = (item) => {
+const selectNumber = (item: any) => {
   selected.value = item;
 };
 </script>
@@ -106,6 +107,7 @@ const selectNumber = (item) => {
       <h1 class="text-3xl">Roulette table</h1>
       <url-form />
       <stats-table />
+      <stats-table2 />
       <roulete-table :arr="arr2" @select="selectNumber" />
       <div class="flex flex-row">
         <part-div> <event-table /> </part-div>
