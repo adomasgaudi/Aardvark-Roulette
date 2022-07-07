@@ -6,10 +6,12 @@ import LogTable from "../components/LogTable.vue";
 import PartDiv from "../components/PartDiv.vue";
 import StatsTable from "../components/StatsTable.vue";
 import UrlForm from "../components/UrlForm.vue";
-import { useUrlData } from "@/utils/stores/urldata";
+import { useUrlData } from "@/utils/stores/useUrlData";
 import { ref } from "vue";
-const main = useUrlData();
+import { storeToRefs } from "pinia";
 
+const main = useUrlData();
+const { loading } = storeToRefs(main);
 
 const arr = [
   "0",
@@ -99,9 +101,10 @@ const selectNumber = (item) => {
 </script>
 
 <template>
-  <contain-div classin="bg-blue-100" classout="bg-gray-100">
-    <div class="text-xl font-bold fadeInUp p-4 w-full">
-      <h1 class="text-3xl">Welcome to the ardvark roulete game</h1>
+  <contain-div classin="" classout=" ">
+    <div class="text-xl font-bold fadeInUp p-4 w-full mb-[200px]">
+      <h1 class="text-3xl">Roulette table</h1>
+      <h1>{{ loading }}</h1>
       <p>url</p>
       <url-form />
       <p>Stats</p>

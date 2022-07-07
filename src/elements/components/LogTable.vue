@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { useUrlData } from "@/utils/stores/urldata";
+import { useUrlData } from "@/utils/stores/useUrlData";
 import { storeToRefs } from "pinia";
 import moment from "moment";
 
 const main = useUrlData();
-const { data } = storeToRefs(main);
+const { data, logText } = storeToRefs(main);
 </script>
 
 <!--
@@ -15,14 +15,9 @@ const { data } = storeToRefs(main);
   -->
 
 <template>
-  <div class="p-2">
-    <p
-      v-if="data"
-      class="text-sm m-0 font-light px-2 bg-gray-200"
-      v-for="log in data.history"
-      :key="log"
-    >
-      {{ moment(log.startTime).format("LTS") }}
+  <div class="p-2 pixel" v-if="logText">
+    <p class="text-md font-thin m-0 px-2" v-for="log in logText" :key="log">
+      {{ log }}
     </p>
   </div>
 </template>

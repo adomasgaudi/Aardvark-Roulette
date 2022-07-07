@@ -2294,6 +2294,11 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
+vite-plugin-remove-console@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/vite-plugin-remove-console/-/vite-plugin-remove-console-1.0.4.tgz#497819d62dbbc6bc97559beccbf211abda6507dd"
+  integrity sha512-enBSWnbXql97cO0QzIvU3MmFSv1wiq4yqMkr3MW+/8fz3x29T+3qV4ux931eSX8zrEdaJ/RBD754xnlqdUSu7A==
+
 vite@^2.9.12:
   version "2.9.13"
   resolved "https://registry.npmjs.org/vite/-/vite-2.9.13.tgz"

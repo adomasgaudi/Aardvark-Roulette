@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useUrlData } from "@/utils/stores/urldata";
+import { useUrlData } from "@/utils/stores/useUrlData";
 import { storeToRefs } from "pinia";
 
 const main = useUrlData();
@@ -8,32 +8,17 @@ const { data } = storeToRefs(main);
 
 <!--  -->
 
-<!--  -->
-
 <template>
   <div>
-    <table class="table-auto" v-if="data">
-      <thead>
-        <tr>
-          <th>Artist</th>
-          <th>Year</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td
-            v-for="item in data.stats"
-            :key="item"
-            class="border border-gray-300 text-center bg-gray-200 w-[40px]"
-          >
-            {{ item.result }}
-          </td>
-        </tr>
-        <tr>
-          <td v-for="item in data.stats" :key="item">{{ item.count }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <button>go</button>
+    <div class="flex flex-wrap" v-if="data">
+      <div v-for="item in data.stats" :key="item" class="flex flex-col">
+        <div class="border border-gray-300 text-center bg-gray-200 w-[40px]">
+          {{ item.result }}
+        </div>
+        <div class="border border-gray-300 text-center bg-gray-200 w-[40px] mb-10">
+          {{ item.count }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>

@@ -8,7 +8,8 @@ import { RouterView } from "vue-router";
 
 <style lang="sass">
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Knewave&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&family=Potta+One&family=Prompt:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Radio+Canada:wght@300;400;500;600;700&family=Rubik+Glitch&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Knewave&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Potta+One&family=Prompt:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Radio+Canada:wght@300;400;500;600;700&family=Rubik+Glitch&family=VT323&display=swap')
+
 body
   // font-family: 'Inter', sans-serif
   // font-family: 'Knewave', cursive
@@ -148,4 +149,11 @@ a
   @extend .shadow_thick !optional
   &:active
     @extend .shadow_inset !optional
+
+
+
+//fonts
+
+body .pixel
+  font-family: 'VT323', monospace
 </style>
