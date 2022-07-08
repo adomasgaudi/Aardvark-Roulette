@@ -37,9 +37,10 @@ const rouleteSelect = (tileNum: number) => {
         class="pointer-events-none col-start-2 col-end-18 row-start-1 shadow_tileTop"
       />
       <button-roulete
+        v-if="data.history && data.config"
         v-for="(tileNum, index) in data.config.positionToId"
         :key="tileNum"
-        :info="{ item: tileNum, index, config: data.config }"
+        :info="{ tileNum, index, config: data.config, history: data.history }"
         :color="data.config.colors[tileNum]"
         @click="rouleteSelect(tileNum)"
       >

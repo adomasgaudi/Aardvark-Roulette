@@ -30,7 +30,7 @@ const showStats = () => (showingStats.value = !showingStats.value);
       <stats-table v-if="showingStats" />
       <roulete-table v-if="!showingStats" @select="selectNumber" />
       <div class="flex flex-row">
-        <part-div> <event-table :tileNum="tileNum" /> </part-div>
+        <part-div> <event-table :curTileNum="tileNum" /> </part-div>
         <part-div> <log-table /></part-div>
       </div>
     </div>

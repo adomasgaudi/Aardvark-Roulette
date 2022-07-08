@@ -19,14 +19,13 @@ const timeNow = () => {
 
 const api = `https://dev-games-backend.advbet.com/v1/ab-roulette/1/`;
 
-
+interface startDeltaT {fake: number; last: number; text: string; timer: number}
 
 const useUrlData = defineStore("main", {
   state: () => ({
     data: {} as any,
-    startDelta: {} as {fake: number, last: number, text: string},
-    eventsArr: [],
-    logText: [],
+    startDelta: {} as startDeltaT,
+    logText: [] as string[],
     errorText: null,
     loading: false,
     timerRunning: false
@@ -41,7 +40,6 @@ const useUrlData = defineStore("main", {
       await this.getStatsNext();
       await this.getHistory();
       this.loading = false;
-      await this.pushEventArr(`Game ${this.data.history[0].id.toString().slice(-3)}  ended with: ${this.data.history[0].result}`)
       if(this.timerRunning === false) {
         await this.wait()
       }
@@ -50,7 +48,6 @@ const useUrlData = defineStore("main", {
     async getSpin() {
       // console.log('get spin');
       this.startDelta.text = "Spinning the wheel!!"
-      await this.pushEventArr(`Game ${this.data.history[0].id.toString().slice(-3)}  ended with: ${this.data.history[0].result}`)
       await setTimeout(async () => {
         // await console.log('now');
         await this.getGameById()
@@ -118,16 +115,18 @@ const useUrlData = defineStore("main", {
     addData(data: {}) {
       this.data = data
     },
-    addstartDelta(data: {fake: number, last: number, text: string}) {
+    addstartDelta(data: startDeltaT) {
       this.startDelta = data
     },
     wait() {
       
       this.pushLogText(`${timeNow()} Sleeping till next game`)
       this.timerRunning = true;
+      this.startDelta.timer = 0;
       const interval = setInterval(() => {
         if(this.startDelta.fake > 0){
           this.startDelta.fake--;
+          this.startDelta.timer++
         }else{
           clearInterval(interval);
           this.timerRunning = false;
@@ -135,12 +134,9 @@ const useUrlData = defineStore("main", {
         }
       }, 1000);
     },
-    pushLogText(data) {
+    pushLogText(data: string) {
       this.logText.push(data)
     },
-    pushEventArr(data) {
-      this.eventsArr.push(data)
-    }
   }
 })
 
