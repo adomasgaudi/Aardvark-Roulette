@@ -8,9 +8,6 @@ import StatsTable from "../containers/StatsTable.vue";
 import UrlForm from "../containers/UrlForm.vue";
 import { useUrlData } from "@/utils/stores/useUrlData";
 import { ref } from "vue";
-import { storeToRefs } from "pinia";
-
-const main = useUrlData();
 
 const selected = ref(null);
 
