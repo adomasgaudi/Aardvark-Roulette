@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const props = defineProps(["color"]);
+defineProps(["color"]);
 
 const redcss = "bg-red-400 hover:bg-red-500";
 const greencss = "bg-green-500 hover:bg-green-600";

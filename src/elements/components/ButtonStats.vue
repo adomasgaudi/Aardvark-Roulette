@@ -11,6 +11,11 @@ const sortArray = (array: any[], key: string) => {
   return result;
 };
 
+interface statsT {
+  result: number;
+  count: number;
+}
+
 onMounted(() => {
   const shift = (number: number, shift: number) => (number + shift) % 37;
   const index = shift(props.info.index, 19);
@@ -25,9 +30,9 @@ onMounted(() => {
   const coldArr = props.info.stats.slice(0, 5);
   const hotArr = props.info.stats.slice(-5);
 
-  if (coldArr.find((obj) => obj.result === props.info.tileNum)) {
+  if (coldArr.find((obj: statsT) => obj.result === props.info.tileNum)) {
     style.backgroundColor = "#4fb0e8";
-  } else if (hotArr.find((obj) => obj.result === props.info.tileNum)) {
+  } else if (hotArr.find((obj: statsT) => obj.result === props.info.tileNum)) {
     style.backgroundColor = "#ec6776";
   }
 
@@ -71,10 +76,9 @@ onMounted(() => {
   <button
     ref="button"
     class="w-[45px] border-none text-center text-lg font-bold text-white col-start-2"
-    v-if="props.info"
-    :id="props.info.index"
+    v-if="info"
+    :id="info.index"
   >
-    <!-- {{ props.data.index }} -->
     <slot />
   </button>
 </template>

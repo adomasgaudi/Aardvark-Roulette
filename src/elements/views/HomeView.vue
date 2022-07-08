@@ -9,10 +9,11 @@ import UrlForm from "../containers/UrlForm.vue";
 import { useUrlData } from "@/utils/stores/useUrlData";
 import { ref } from "vue";
 
-const selected = ref(null);
+const tileNum = ref(0);
 
-const selectNumber = (item: any) => {
-  selected.value = item;
+const selectNumber = (tilenumber: number) => {
+  tileNum.value = tilenumber;
+  console.log(tilenumber, tileNum.value);
 };
 
 const showingStats = ref(false);
@@ -29,7 +30,7 @@ const showStats = () => (showingStats.value = !showingStats.value);
       <stats-table v-if="showingStats" />
       <roulete-table v-if="!showingStats" @select="selectNumber" />
       <div class="flex flex-row">
-        <part-div> <event-table /> </part-div>
+        <part-div> <event-table :tileNum="tileNum" /> </part-div>
         <part-div> <log-table /></part-div>
       </div>
     </div>

@@ -11,15 +11,17 @@ const { data } = storeToRefs(main);
 
 defineProps(["arr"]);
 
-// const emit = defineEmits(["select"]);
+const emit = defineEmits(["select"]);
 
 // const selected = ref(null);
 
-// const rouleteSelect = (item) => {
-//   emit("select", item);
-//   // console.log(item);
-//   selected.value = item;
-// };
+const rouleteSelect = (tileNum: number) => {
+  console.log(tileNum);
+
+  emit("select", tileNum);
+  // console.log(item);
+  // selected.value = tileNum;
+};
 </script>
 
 <template>
@@ -29,18 +31,19 @@ defineProps(["arr"]);
       v-if="data.config"
     >
       <div
-        class="pointer-events-none col-start-1 col-end-19 row-start-1 row-end-5 rouleteCorners shadow_thick"
+        class="pointer-events-none col-start-1 col-end-19 row-start-1 row-end-5 rouleteCorners shadow_thick z-10"
       />
       <div
         class="pointer-events-none col-start-2 col-end-18 row-start-1 shadow_tileTop"
       />
       <button-roulete
-        v-for="(item, index) in data.config.positionToId"
-        :key="item"
-        :info="{ item, index, config: data.config }"
-        :color="data.config.colors[index]"
+        v-for="(tileNum, index) in data.config.positionToId"
+        :key="tileNum"
+        :info="{ item: tileNum, index, config: data.config }"
+        :color="data.config.colors[tileNum]"
+        @click="rouleteSelect(tileNum)"
       >
-        {{ item }}
+        {{ tileNum }}
       </button-roulete>
     </div>
   </div>

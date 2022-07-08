@@ -182,7 +182,7 @@ a
 
 .shadow_tileTop
   box-shadow: rgba(0, 0, 0, 0.4) 0px 5px 5px -1px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset
-  clip-path: inset(-5px 1px -5px 1px)
+  clip-path: inset(-5px 0px -5px 0px)
 
 
 //fonts

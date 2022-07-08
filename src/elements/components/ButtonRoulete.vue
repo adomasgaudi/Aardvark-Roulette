@@ -57,10 +57,9 @@ onMounted(() => {
     ref="button"
     class="w-[45px] border-none text-center text-lg font-bold text-white col-start-2"
     :class="color === 'red' ? redcss : color === 'green' ? greencss : blackcss"
-    v-if="props.info"
-    :id="props.info.index"
+    v-if="info"
+    :id="info.index"
   >
-    <!-- {{ props.data.index }} -->
     <slot />
   </button>
 </template>
