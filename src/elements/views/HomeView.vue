@@ -5,100 +5,22 @@ import EventTable from "../containers/EventTable.vue";
 import LogTable from "../containers/LogTable.vue";
 import PartDiv from "../components/PartDiv.vue";
 import StatsTable from "../containers/StatsTable.vue";
-import StatsTable2 from "../containers/StatsTable2.vue";
 import UrlForm from "../containers/UrlForm.vue";
 import { useUrlData } from "@/utils/stores/useUrlData";
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 
 const main = useUrlData();
-const { loading } = storeToRefs(main);
-
-const arr = [
-  "0",
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "11",
-  "12",
-  "13",
-  "14",
-  "15",
-  "16",
-  "17",
-  "18",
-  "19",
-  "20",
-  "21",
-  "22",
-  "23",
-  "24",
-  "25",
-  "26",
-  "27",
-  "28",
-  "29",
-  "30",
-  "31",
-  "32",
-  "33",
-  "34",
-  "35",
-  "36",
-];
-// const arr3 = arr.sort()
-const arr2 = [
-  "0",
-  "1",
-  "4",
-  "7",
-  "10",
-  "13",
-  "16",
-  "19",
-  "22",
-  "25",
-  "28",
-  "31",
-  "34",
-  "2",
-  "5",
-  "8",
-  "11",
-  "14",
-  "17",
-  "20",
-  "23",
-  "26",
-  "29",
-  "32",
-  "35",
-  "3",
-  "6",
-  "9",
-  "12",
-  "15",
-  "18",
-  "21",
-  "24",
-  "27",
-  "30",
-  "33",
-  "36",
-];
 
 const selected = ref(null);
 
 const selectNumber = (item: any) => {
   selected.value = item;
 };
+
+const showingStats = ref(false);
+
+const showStats = () => (showingStats.value = !showingStats.value);
 </script>
 
 <template>
@@ -106,9 +28,9 @@ const selectNumber = (item: any) => {
     <div class="text-xl fadeInUp p-4 w-full mb-[200px]">
       <h1 class="text-3xl">Roulette table</h1>
       <url-form />
-      <stats-table />
-      <stats-table2 />
-      <roulete-table :arr="arr2" @select="selectNumber" />
+      <button @click="showStats">show stats</button>
+      <stats-table v-if="showingStats" />
+      <roulete-table v-if="!showingStats" @select="selectNumber" />
       <div class="flex flex-row">
         <part-div> <event-table /> </part-div>
         <part-div> <log-table /></part-div>
