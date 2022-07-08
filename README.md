@@ -3,14 +3,16 @@
 
 ## Project Setup
 
+Download and yarn
+
 ```sh
-npm install
+yarn
 ```
 
 ### Compile and Hot-Reload for Development
 
 ```sh
-npm run dev
+yarn dev
 ```
 
 
