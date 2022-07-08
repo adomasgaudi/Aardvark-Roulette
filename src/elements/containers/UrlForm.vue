@@ -1,17 +1,22 @@
 <script lang="ts" setup>
 import { useUrlData } from "@/utils/stores/useUrlData";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 const main = useUrlData();
 
 onMounted(() => {
   main.getGame();
-  // main.getSpinData();
 });
+
+const url = ref("https://dev-games-backend.advbet.com/v1/ab-roulette/1/");
 </script>
 
 <template>
   <form>
-    <label for="">Current Roulete table Url</label>
-    <input type="text" />
+    <input
+      type="text"
+      spellcheck="false"
+      class="border-none focus:outline-none pixel text-xl font-medium p-2 bg-inherit w-[500px]"
+      v-model="url"
+    />
   </form>
 </template>

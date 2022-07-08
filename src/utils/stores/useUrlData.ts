@@ -1,7 +1,7 @@
 import {defineStore} from 'pinia'
 import moment from 'moment';
 
-const awesome = async(promise) => {
+const awesome = async(promise: any) => {
   try{
     const res = await promise;
     const data = await res.json();
@@ -17,7 +17,7 @@ const timeNow = () => {
   return `${now}.${mili}`
 }
 
-const api = `https://dev-games-backend.advbet.com/v1/ab-roulette/`;
+const api = `https://dev-games-backend.advbet.com/v1/ab-roulette/1/`;
 
 
 
@@ -69,7 +69,7 @@ const useUrlData = defineStore("main", {
 
 
     async getConfig() {
-      const [config, error] = await awesome(fetch(`${api}1/configuration`));
+      const [config, error] = await awesome(fetch(`${api}configuration`));
       await this.pushLogText(`${timeNow()} GET .../configuration`)
 
       if(config) await this.addData({ ...this.data, config })
@@ -77,9 +77,9 @@ const useUrlData = defineStore("main", {
     },
 
     async getStatsNext() {
-      const [next] = await awesome(fetch(`${api}1/nextGame`));
+      const [next] = await awesome(fetch(`${api}nextGame`));
       await this.pushLogText(`${timeNow()} GET .../nextGame`)
-      const [stats] = await awesome(fetch(`${api}1/stats`));
+      const [stats] = await awesome(fetch(`${api}stats`));
       await this.pushLogText(`${timeNow()} GET .../stats`)
 
       if(next) {
@@ -99,7 +99,7 @@ const useUrlData = defineStore("main", {
       // console.log('last game');
     },
     async getHistory() {
-      const [history, error] = await awesome(fetch(`${api}1/history`));
+      const [history, error] = await awesome(fetch(`${api}history`));
       await this.pushLogText(`${timeNow()} GET .../history`)
 
       if(history) await this.addData({ ...this.data, history })
