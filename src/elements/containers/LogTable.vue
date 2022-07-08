@@ -1,18 +1,10 @@
 <script lang="ts" setup>
 import { useUrlData } from "@/utils/stores/useUrlData";
 import { storeToRefs } from "pinia";
-import moment from "moment";
 
 const main = useUrlData();
-const { data, logText } = storeToRefs(main);
+const { logText } = storeToRefs(main);
 </script>
-
-<!--
-  
-
-
-
-  -->
 
 <template>
   <div class="p-2" v-if="logText">

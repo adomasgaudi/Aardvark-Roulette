@@ -5,21 +5,10 @@ import ButtonStats from "../components/ButtonStats.vue";
 
 const main = useUrlData();
 const { data } = storeToRefs(main);
-
-const sortByKey = (array: any[], key: string) => {
-  return array.sort((a: any, b: any) => a[key] - b[key]);
-};
-
-// sort array without changing it and return a new array
 const sortArray = (array: any[], key: string) => {
-  const result = array.slice().sort((a: any, b: any) => a[key] - b[key]);
-  // console.log(result);
+  const result = array.slice().sort((a: {}, b: {}) => a[key] - b[key]);
   return result;
 };
-
-if (data) {
-  console.log(data.value);
-}
 </script>
 
 <template>

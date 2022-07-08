@@ -10,16 +10,15 @@ const awesome = async(promise: any) => {
     return [null, error]
   }
 }
-
 const timeNow = () => {
   const now = moment().format("HH:mm:ss")
   const mili = moment().valueOf().toString().slice(-3)
   return `${now}.${mili}`
 }
 
-const api = `https://dev-games-backend.advbet.com/v1/ab-roulette/1/`;
-
 interface startDeltaT {fake: number; last: number; text: string; timer: number}
+
+//
 
 const useUrlData = defineStore("main", {
   state: () => ({
@@ -28,63 +27,45 @@ const useUrlData = defineStore("main", {
     logText: [] as string[],
     errorText: null,
     loading: false,
-    timerRunning: false
+    timerRunning: false,
   }),
   actions: {
-
-
-    async getGame() {
+    async getGame(url: string) {
       this.loading = true;
       await this.pushLogText(`${timeNow()} Loading game...`)
-      await this.getConfig();
-      await this.getStatsNext();
-      await this.getHistory();
+      await this.getConfig(url);
+      await this.getStatsNext(url);
+      await this.getHistory(url);
       this.loading = false;
       if(this.timerRunning === false) {
-        await this.wait()
+        await this.wait(url)
       }
     },
-    
-    async getSpin() {
-      // console.log('get spin');
+    async getSpin(url: string) {
       this.startDelta.text = "Spinning the wheel!!"
       await setTimeout(async () => {
-        // await console.log('now');
-        await this.getGameById()
-        await this.getStatsNext()
-        await this.getHistory();
+        await this.getStatsNext(url)
+        await this.getHistory(url);
         this.startDelta.text = ""
-        await this.wait()
+        await this.wait(url)
       }, 3000)
       
     },
-
-
-
-
-
-
-
-    async getConfig() {
-      const [config, error] = await awesome(fetch(`${api}configuration`));
+    async getConfig(url: string) {
+      const [config, error] = await awesome(fetch(`${url}/configuration`));
       await this.pushLogText(`${timeNow()} GET .../configuration`)
 
       if(config) await this.addData({ ...this.data, config })
       if(error) this.errorText = error.message
     },
-
-    async getStatsNext() {
-      const [next] = await awesome(fetch(`${api}nextGame`));
+    async getStatsNext(url: string) {
+      const [next] = await awesome(fetch(`${url}/nextGame`));
       await this.pushLogText(`${timeNow()} GET .../nextGame`)
-      const [stats] = await awesome(fetch(`${api}stats?limit=200 `));
-      await this.pushLogText(`${timeNow()} GET .../stats`)
-
+      const [stats] = await awesome(fetch(`${url}/stats?limit=200 `));
+      await this.pushLogText(`${timeNow()} GET .../stats?limit=200`)
       if(next) {
-        
         this.loading = false
         await this.addData({ ...this.data, next, stats })
-        // console.log(next);
-        
         await this.addstartDelta({
           ...this.startDelta,
           last: next.startDelta,
@@ -92,33 +73,20 @@ const useUrlData = defineStore("main", {
         });
       }
     },
-    async getGameById() {
-      // console.log('last game');
-    },
-    async getHistory() {
-      const [history, error] = await awesome(fetch(`${api}history`));
+    async getHistory(url: string) {
+      const [history, error] = await awesome(fetch(`${url}/history`));
       await this.pushLogText(`${timeNow()} GET .../history`)
 
       if(history) await this.addData({ ...this.data, history })
       if(error) this.errorText = error.message
     },
-    async getSchedule() {
-      // console.log('shedule');
-    },
-
-
-
-
-
-
-
     addData(data: {}) {
       this.data = data
     },
     addstartDelta(data: startDeltaT) {
       this.startDelta = data
     },
-    wait() {
+    wait(url: string) {
       
       this.pushLogText(`${timeNow()} Sleeping till next game`)
       this.timerRunning = true;
@@ -130,7 +98,7 @@ const useUrlData = defineStore("main", {
         }else{
           clearInterval(interval);
           this.timerRunning = false;
-          this.getSpin()
+          this.getSpin(url)
         }
       }, 1000);
     },

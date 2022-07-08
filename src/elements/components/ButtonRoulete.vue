@@ -59,8 +59,6 @@ onMounted(() => {
 });
 
 onUpdated(() => {
-  console.log(startDelta.value);
-
   if (
     props.info.tileNum === props.info.history[0].result &&
     startDelta.value.timer < 10

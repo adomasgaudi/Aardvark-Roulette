@@ -5,7 +5,6 @@ import ButtonEvent from "../components/ButtonEvent.vue";
 
 const main = useUrlData();
 const { startDelta, data } = storeToRefs(main);
-
 defineProps(["curTileNum"]);
 </script>
 

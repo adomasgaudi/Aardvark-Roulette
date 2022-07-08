@@ -2,15 +2,7 @@
 import { onMounted, ref } from "vue";
 
 const button = ref();
-
 const props = defineProps(["color", "info"]);
-
-const sortArray = (array: any[], key: string) => {
-  const result = array.slice().sort((a: any, b: any) => a[key] - b[key]);
-  // console.log(result);
-  return result;
-};
-
 interface statsT {
   result: number;
   count: number;
@@ -25,7 +17,6 @@ onMounted(() => {
   const grid = (col: number, row: number) =>
     `grid-row: ${row} ; grid-column: ${col}; `;
   const rn = "0%"; //roundedness
-  const count = sortArray(props.info.stats, "result")[props.info.tileNum].count;
 
   const coldArr = props.info.stats.slice(0, 5);
   const hotArr = props.info.stats.slice(-5);
@@ -35,9 +26,6 @@ onMounted(() => {
   } else if (hotArr.find((obj: statsT) => obj.result === props.info.tileNum)) {
     style.backgroundColor = "#ec6776";
   }
-
-  // const text = ` background-color: hsl(0, 100%, ${100 - count * 5}%);`;
-  // style.cssText += text;
 
   if (index >= 0 && index <= 17)
     style.cssText += `${grid(forwIndex(index), 1)}`;
@@ -67,8 +55,6 @@ onMounted(() => {
     style.cssText += `
       border-radius:  ${rn} ${rn} ${rn} 30px / ${rn}  ${rn}  ${rn} 30px ;`;
   }
-
-  //
 });
 </script>
 
@@ -82,4 +68,3 @@ onMounted(() => {
     <slot />
   </button>
 </template>
-<!--  -->
