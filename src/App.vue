@@ -8,11 +8,22 @@ import { RouterView } from "vue-router";
 
 <style lang="sass">
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Knewave&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&family=Potta+One&family=Prompt:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Radio+Canada:wght@300;400;500;600;700&family=Rubik+Glitch&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Knewave&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Potta+One&family=Prompt:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Radio+Canada:wght@300;400;500;600;700&family=Rubik+Glitch&family=VT323&display=swap')
+
+$color-text: #3d3d3c
+$color-light: mix(#3d3d3c, #fff, 50%)
+
+
 body
-  // font-family: 'Inter', sans-serif
+  background: #f2f3f2
+  font-family: 'Inter', sans-serif
+  color: $color-text
+
+.lighter
+  color: $color-light
+
   // font-family: 'Knewave', cursive
-  font-family: 'Nunito Sans', sans-serif
+  // font-family: 'Nunito Sans', sans-serif
   // font-family: 'Potta One', cursive
   // font-family: 'Prompt', sans-serif
   // font-family: 'Radio Canada', sans-serif
@@ -110,6 +121,23 @@ a
   @extend .animate15 !optional
   animation-name: fadeInUp
 
+@keyframes fadeInUp10
+  from
+    opacity: 0
+    transform: translateY(10px)
+
+  to
+    opacity: 1
+    transform: none
+
+.fadeInUp10
+  @extend .animate100 !optional
+  animation-name: fadeInUp10
+
+.fadeInUp15s
+  @extend .animate15 !optional
+  animation-name: fadeInUp
+
 
 // shadows
 
@@ -148,4 +176,17 @@ a
   @extend .shadow_thick !optional
   &:active
     @extend .shadow_inset !optional
+
+.shadow_tile
+  box-shadow: rgba(0, 0, 0, 0.2) 0px -3px 0px inset
+
+.shadow_tileTop
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 5px 5px -1px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset
+  clip-path: inset(-5px 0px -5px 0px)
+
+
+//fonts
+
+body .pixel
+  font-family: 'VT323', monospace
 </style>
