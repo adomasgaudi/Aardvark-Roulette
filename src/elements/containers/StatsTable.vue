@@ -5,6 +5,21 @@ import ButtonStats from "../components/ButtonStats.vue";
 
 const main = useUrlData();
 const { data } = storeToRefs(main);
+
+const sortByKey = (array: any[], key: string) => {
+  return array.sort((a: any, b: any) => a[key] - b[key]);
+};
+
+// sort array without changing it and return a new array
+const sortArray = (array: any[], key: string) => {
+  const result = array.slice().sort((a: any, b: any) => a[key] - b[key]);
+  // console.log(result);
+  return result;
+};
+
+if (data) {
+  console.log(data.value);
+}
 </script>
 
 <template>
@@ -16,12 +31,29 @@ const { data } = storeToRefs(main);
       <div class="absolute w-full h-full rouleteCorners shadow_thick" />
       <div class="absolute w-[88.5%] right-[45px] h-[33%] shadow_tileTop" />
       <button-stats
-        v-for="(item, index) in data.config.positionToId"
-        :key="item"
-        :info="{ item, index, config: data.config }"
+        v-for="(tileNum, index) in data.config.positionToId"
+        :key="tileNum"
+        :info="{
+          tileNum,
+          index,
+          config: data.config,
+          stats: data.stats,
+        }"
         :color="data.config.colors[index]"
+        class="relative"
       >
-        {{ item }}
+        <div class="flex flex-col justify-center items-center">
+          <div
+            class="text-center font-bold text-gray-500 leading-5 border-b border-b-gray-400"
+          >
+            {{ tileNum }}
+          </div>
+          <div
+            class="fadeInUp10 text-center text-sm font-bold text-gray-600 leading-5"
+          >
+            {{ sortArray(data.stats, "result")[tileNum].count }}
+          </div>
+        </div>
       </button-stats>
     </div>
   </div>

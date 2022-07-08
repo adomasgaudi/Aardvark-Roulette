@@ -121,6 +121,23 @@ a
   @extend .animate15 !optional
   animation-name: fadeInUp
 
+@keyframes fadeInUp10
+  from
+    opacity: 0
+    transform: translateY(10px)
+
+  to
+    opacity: 1
+    transform: none
+
+.fadeInUp10
+  @extend .animate100 !optional
+  animation-name: fadeInUp10
+
+.fadeInUp15s
+  @extend .animate15 !optional
+  animation-name: fadeInUp
+
 
 // shadows
 
@@ -165,6 +182,7 @@ a
 
 .shadow_tileTop
   box-shadow: rgba(0, 0, 0, 0.4) 0px 5px 5px -1px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset
+  clip-path: inset(-5px 1px -5px 1px)
 
 
 //fonts

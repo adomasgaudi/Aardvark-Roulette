@@ -39,13 +39,13 @@ onMounted(() => {
     width: 90px`;
   }
   if (index >= 20 && index <= 36) style.cssText = `${grid(revIndex(index), 3)}`;
+  if (index == 35) {
+    style.cssText += `
+        border-radius:  ${rn} ${rn} ${rn} 30px / ${rn}  ${rn}  ${rn} 30px ;`;
+  }
   if (index == 36) {
     style.cssText += `
     ${grid(1, 2)}`;
-  }
-  if (index == 35) {
-    style.cssText += `
-      border-radius:  ${rn} ${rn} ${rn} 30px / ${rn}  ${rn}  ${rn} 30px ;`;
   }
 
   //

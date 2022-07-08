@@ -79,7 +79,7 @@ const useUrlData = defineStore("main", {
     async getStatsNext() {
       const [next] = await awesome(fetch(`${api}nextGame`));
       await this.pushLogText(`${timeNow()} GET .../nextGame`)
-      const [stats] = await awesome(fetch(`${api}stats`));
+      const [stats] = await awesome(fetch(`${api}stats?limit=200 `));
       await this.pushLogText(`${timeNow()} GET .../stats`)
 
       if(next) {
