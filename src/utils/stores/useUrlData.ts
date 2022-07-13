@@ -32,7 +32,7 @@ const useUrlData = defineStore("main", {
   actions: {
     async getGame(url: string) {
       this.loading = true;
-      await this.pushLogText(`${timeNow()} Loading game...`)
+      this.pushLogText(`${timeNow()} Loading game...`)
       await this.getConfig(url);
       await this.getStatsNext(url);
       // await this.getHistory(url);
@@ -40,7 +40,7 @@ const useUrlData = defineStore("main", {
       await this.getById(url, '1944865')
       this.loading = false;
       if(this.timerRunning === false) {
-        await this.wait(url)
+        this.wait(url)
       }
     },
     async getSpin(url: string) {
@@ -62,7 +62,7 @@ const useUrlData = defineStore("main", {
       console.log(gameById);
       
       
-      if(gameById) await this.addData({ ...this.data, gameById })
+      if(gameById) this.addData({ ...this.data, gameById })
       if(error) this.errorText = error.message
     },
     async getConfig(url: string) {
