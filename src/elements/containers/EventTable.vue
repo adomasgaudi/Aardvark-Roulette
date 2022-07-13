@@ -12,7 +12,7 @@ defineProps(["curTileNum"]);
   <div v-if="startDelta && data && data.config && data.next">
     <div class="flex">
       <button-event
-        v-if="!!curTileNum == true || curTileNum == 0"
+        v-if="!!curTileNum === true || curTileNum === 0"
         :color="data.config.colors[curTileNum]"
       >
         <template v-slot:number>

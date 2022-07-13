@@ -1,15 +1,16 @@
 import {defineStore} from 'pinia'
 import moment from 'moment';
 
-const awesome = async(promise: any) => {
+const fetcher = async(url: string) => {
   try{
-    const res = await promise;
+    const res = await fetch(url);
     const data = await res.json();
     return [data, null] as any
   } catch(error) {
     return [null, error]
   }
 }
+
 const timeNow = () => {
   const now = moment().format("HH:mm:ss")
   const mili = moment().valueOf().toString().slice(-3)
@@ -57,7 +58,7 @@ const useUrlData = defineStore("main", {
     },
 
     async getById(url: string, id: string) {
-      const [gameById, error] = await awesome(fetch(`${url}/game/${id}`));
+      const [gameById, error] = await fetcher(`${url}/game/${id}`);
       this.pushLogText(`${timeNow()} GET .../game/{id}`)
       console.log(gameById);
       
@@ -66,16 +67,16 @@ const useUrlData = defineStore("main", {
       if(error) this.errorText = error.message
     },
     async getConfig(url: string) {
-      const [config, error] = await awesome(fetch(`${url}/configuration`));
+      const [config, error] = await fetcher(`${url}/configuration`);
       this.pushLogText(`${timeNow()} GET .../configuration`)
 
       if(config) this.addData({ ...this.data, config })
       if(error) this.errorText = error.message
     },
     async getStatsNext(url: string) {
-      const [next] = await awesome(fetch(`${url}/nextGame`));
+      const [next] = await fetcher(`${url}/nextGame`);
       this.pushLogText(`${timeNow()} GET .../nextGame`)
-      const [stats] = await awesome(fetch(`${url}/stats?limit=200 `));
+      const [stats] = await fetcher(`${url}/stats?limit=200 `);
       this.pushLogText(`${timeNow()} GET .../stats?limit=200`)
       if(next) {
         this.loading = false
@@ -88,7 +89,7 @@ const useUrlData = defineStore("main", {
       }
     },
     async getHistory(url: string) {
-      const [history, error] = await awesome(fetch(`${url}/history`));
+      const [history, error] = await fetcher(`${url}/history`);
       this.pushLogText(`${timeNow()} GET .../history`)
 
       if(history) this.addData({ ...this.data, history })

@@ -29,16 +29,16 @@ onMounted(() => {
 
   if (index >= 0 && index <= 17)
     style.cssText += `${grid(forwIndex(index), 1)}`;
-  if (index == 0) {
+  if (index === 0) {
     style.cssText += `
       border-radius: 30px ${rn} ${rn} ${rn} / 30px ${rn}  ${rn}  ${rn};`;
   }
-  if (index == 17) {
+  if (index === 17) {
     style.cssText += `
       border-radius: ${rn} 30px ${rn}  ${rn} / ${rn} 30px ${rn}  ${rn};`;
   }
-  if (index == 18) style.cssText += `${grid(18, 2)};`;
-  if (index == 19) {
+  if (index === 18) style.cssText += `${grid(18, 2)};`;
+  if (index === 19) {
     style.cssText += `
     ${grid(17, 3)}; grid-column-end: 19;
     border-radius: ${rn} ${rn} 30px ${rn} / ${rn} ${rn} 30px ${rn};
@@ -46,11 +46,11 @@ onMounted(() => {
   }
   if (index >= 20 && index <= 36)
     style.cssText += `${grid(revIndex(index), 3)}`;
-  if (index == 35) {
+  if (index === 35) {
     style.cssText += `
         border-radius:  ${rn} ${rn} ${rn} 30px / ${rn}  ${rn}  ${rn} 30px ;`;
   }
-  if (index == 36) {
+  if (index === 36) {
     style.cssText += `
     ${grid(1, 2)}`;
   }
