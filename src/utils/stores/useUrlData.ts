@@ -35,7 +35,9 @@ const useUrlData = defineStore("main", {
       await this.pushLogText(`${timeNow()} Loading game...`)
       await this.getConfig(url);
       await this.getStatsNext(url);
-      await this.getHistory(url);
+      // await this.getHistory(url);
+      const history = await this.getHistory(url);
+      await this.getById(url, '1944865')
       this.loading = false;
       if(this.timerRunning === false) {
         await this.wait(url)
@@ -43,30 +45,42 @@ const useUrlData = defineStore("main", {
     },
     async getSpin(url: string) {
       this.startDelta.text = "Spinning the wheel!!"
-      await setTimeout(async () => {
+      setTimeout(async () => {
         await this.getStatsNext(url)
-        await this.getHistory(url);
+        // await this.getHistory(url);
+        const history = await this.getHistory(url);
+        await this.getById(url, "1944865")
         this.startDelta.text = ""
-        await this.wait(url)
+        this.wait(url)
       }, 3000)
       
     },
+
+    async getById(url: string, id: string) {
+      const [gameById, error] = await awesome(fetch(`${url}/game/${id}`));
+      this.pushLogText(`${timeNow()} GET .../game/{id}`)
+      console.log(gameById);
+      
+      
+      if(gameById) await this.addData({ ...this.data, gameById })
+      if(error) this.errorText = error.message
+    },
     async getConfig(url: string) {
       const [config, error] = await awesome(fetch(`${url}/configuration`));
-      await this.pushLogText(`${timeNow()} GET .../configuration`)
+      this.pushLogText(`${timeNow()} GET .../configuration`)
 
-      if(config) await this.addData({ ...this.data, config })
+      if(config) this.addData({ ...this.data, config })
       if(error) this.errorText = error.message
     },
     async getStatsNext(url: string) {
       const [next] = await awesome(fetch(`${url}/nextGame`));
-      await this.pushLogText(`${timeNow()} GET .../nextGame`)
+      this.pushLogText(`${timeNow()} GET .../nextGame`)
       const [stats] = await awesome(fetch(`${url}/stats?limit=200 `));
-      await this.pushLogText(`${timeNow()} GET .../stats?limit=200`)
+      this.pushLogText(`${timeNow()} GET .../stats?limit=200`)
       if(next) {
         this.loading = false
-        await this.addData({ ...this.data, next, stats })
-        await this.addstartDelta({
+        this.addData({ ...this.data, next, stats })
+        this.addstartDelta({
           ...this.startDelta,
           last: next.startDelta,
           fake: next.startDelta - 2,
@@ -75,10 +89,11 @@ const useUrlData = defineStore("main", {
     },
     async getHistory(url: string) {
       const [history, error] = await awesome(fetch(`${url}/history`));
-      await this.pushLogText(`${timeNow()} GET .../history`)
+      this.pushLogText(`${timeNow()} GET .../history`)
 
-      if(history) await this.addData({ ...this.data, history })
+      if(history) this.addData({ ...this.data, history })
       if(error) this.errorText = error.message
+      // return history
     },
     addData(data: {}) {
       this.data = data

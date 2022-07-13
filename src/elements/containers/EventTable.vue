@@ -24,14 +24,14 @@ defineProps(["curTileNum"]);
       </button-event>
       <p v-if="startDelta.timer < 10">The result was:</p>
       <button-event
-        v-if="startDelta.timer < 10"
+        v-if="startDelta.timer < 10 && data.gameById"
         :color="data.config.colors[data.history[0].result]"
       >
         <template v-slot:number>
-          {{ data.history[0].id.toString().slice(-3) }}
+          {{ data.gameById.id.toString().slice(-3) }}
         </template>
         <template v-slot:result>
-          {{ data.history[0].result }}
+          {{ data.gameById.result }}
         </template>
       </button-event>
     </div>
