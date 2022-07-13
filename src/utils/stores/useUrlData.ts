@@ -18,12 +18,23 @@ const timeNow = () => {
 }
 
 interface startDeltaT {fake: number; last: number; text: string; timer: number}
-
-//
+interface dataT {
+  history: unknown, 
+  config: {
+    name: string, 
+    slots: number, 
+    results: string[], 
+    colors: {}, 
+    positionToId: {}
+  }, 
+  stats: {result: number, count:number}[], 
+  getById: unknown, 
+  next: unknown
+}
 
 const useUrlData = defineStore("main", {
   state: () => ({
-    data: {} as any,
+    data: {} as dataT,
     startDelta: {} as startDeltaT,
     logText: [] as string[],
     errorText: null,
@@ -36,7 +47,6 @@ const useUrlData = defineStore("main", {
       this.pushLogText(`${timeNow()} Loading game...`)
       await this.getConfig(url);
       await this.getStatsNext(url);
-      // await this.getHistory(url);
       const history = await this.getHistory(url);
       await this.getById(url, '1944865')
       this.loading = false;
@@ -48,7 +58,6 @@ const useUrlData = defineStore("main", {
       this.startDelta.text = "Spinning the wheel!!"
       setTimeout(async () => {
         await this.getStatsNext(url)
-        // await this.getHistory(url);
         const history = await this.getHistory(url);
         await this.getById(url, "1944865")
         this.startDelta.text = ""
@@ -60,9 +69,6 @@ const useUrlData = defineStore("main", {
     async getById(url: string, id: string) {
       const [gameById, error] = await fetcher(`${url}/game/${id}`);
       this.pushLogText(`${timeNow()} GET .../game/{id}`)
-      console.log(gameById);
-      
-      
       if(gameById) this.addData({ ...this.data, gameById })
       if(error) this.errorText = error.message
     },
@@ -94,9 +100,8 @@ const useUrlData = defineStore("main", {
 
       if(history) this.addData({ ...this.data, history })
       if(error) this.errorText = error.message
-      // return history
     },
-    addData(data: {}) {
+    addData(data: dataT) {
       this.data = data
     },
     addstartDelta(data: startDeltaT) {

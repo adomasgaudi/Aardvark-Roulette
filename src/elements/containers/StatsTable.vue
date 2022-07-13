@@ -5,10 +5,14 @@ import ButtonStats from "../components/ButtonStats.vue";
 
 const main = useUrlData();
 const { data } = storeToRefs(main);
-const sortArray = (array: any[], key: string) => {
-  const result = array.slice().sort((a: {}, b: {}) => a[key] - b[key]);
+
+type anyO = Record<string, unknown>;
+const sortArray = (array: anyO[], key: string) => {
+  const result = array.slice().sort((a: anyO, b: anyO) => a[key] - b[key]);
   return result;
 };
+
+//
 </script>
 
 <template>
