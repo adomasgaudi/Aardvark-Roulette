@@ -22,7 +22,7 @@ const sortArray = (array: anyO[], key: string) => {
       v-if="data.config"
     >
       <div
-        class="pointer-events-none col-start-1 col-end-19 row-start-1 row-end-5 rouleteCorners shadow_thick z-10"
+        class="pointer-events-none col-start-1 col-end-19 row-start-1 row-end-5 rounded-[30px] shadow_thick z-10"
       />
       <div
         class="pointer-events-none col-start-2 col-end-18 row-start-1 shadow_tileTop"
@@ -53,8 +53,3 @@ const sortArray = (array: anyO[], key: string) => {
     </div>
   </div>
 </template>
-
-<style lang="sass">
-.rouleteCorners
-  border-radius:  30px 30px 30px 30px / 30px 30px 30px 30px
-</style>
