@@ -21,8 +21,12 @@ const sortArray = (array: anyO[], key: string) => {
       class="grid grid-cols-18 grid-rows-3 h-[140px] relative"
       v-if="data.config"
     >
-      <div class="absolute w-full h-full rouleteCorners shadow_thick" />
-      <div class="absolute w-[88.5%] right-[45px] h-[33%] shadow_tileTop" />
+      <div
+        class="pointer-events-none col-start-1 col-end-19 row-start-1 row-end-5 rouleteCorners shadow_thick z-10"
+      />
+      <div
+        class="pointer-events-none col-start-2 col-end-18 row-start-1 shadow_tileTop"
+      />
       <button-stats
         v-for="(tileNum, index) in data.config.positionToId"
         :key="tileNum"
@@ -32,8 +36,6 @@ const sortArray = (array: anyO[], key: string) => {
           config: data.config,
           stats: data.stats,
         }"
-        :color="data.config.colors[index]"
-        class="relative"
       >
         <div class="flex flex-col justify-center items-center">
           <div
