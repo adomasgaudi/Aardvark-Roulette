@@ -29,7 +29,7 @@ interface dataT {
   }, 
   stats: {result: number, count:number}[], 
   getById: unknown, 
-  next: unknown
+  next: unknown,
 }
 
 const useUrlData = defineStore("main", {
@@ -40,6 +40,7 @@ const useUrlData = defineStore("main", {
     errorText: null,
     loading: false,
     timerRunning: false,
+    urlText: "" as string,
   }),
   actions: {
     async getGame(url: string) {
@@ -48,10 +49,10 @@ const useUrlData = defineStore("main", {
       await this.getConfig(url);
       await this.getStatsNext(url);
       const history = await this.getHistory(url);
-      await this.getById(url, '1944865')
+      if(this.data.history) await this.getById(url, this.data.history[0].id.toString())
       this.loading = false;
       if(this.timerRunning === false) {
-        this.wait(url)
+        this.timerInit()
       }
     },
     async getSpin(url: string) {
@@ -59,13 +60,12 @@ const useUrlData = defineStore("main", {
       setTimeout(async () => {
         await this.getStatsNext(url)
         const history = await this.getHistory(url);
-        await this.getById(url, "1944865")
+        if(this.history) await this.getById(url, this.history[0].id.toString())
         this.startDelta.text = ""
-        this.wait(url)
+        this.timerInit()
       }, 3000)
       
     },
-
     async getById(url: string, id: string) {
       const [gameById, error] = await fetcher(`${url}/game/${id}`);
       this.pushLogText(`${timeNow()} GET .../game/{id}`)
@@ -75,7 +75,7 @@ const useUrlData = defineStore("main", {
     async getConfig(url: string) {
       const [config, error] = await fetcher(`${url}/configuration`);
       this.pushLogText(`${timeNow()} GET .../configuration`)
-
+      
       if(config) this.addData({ ...this.data, config })
       if(error) this.errorText = error.message
     },
@@ -97,9 +97,14 @@ const useUrlData = defineStore("main", {
     async getHistory(url: string) {
       const [history, error] = await fetcher(`${url}/history`);
       this.pushLogText(`${timeNow()} GET .../history`)
-
+      
       if(history) this.addData({ ...this.data, history })
       if(error) this.errorText = error.message
+    },
+    timerInit() {
+      this.pushLogText(`${timeNow()} Sleeping till next game`);
+      this.timerRunning = true;
+      this.startDelta.timer = 0;
     },
     addData(data: dataT) {
       this.data = data
@@ -107,21 +112,8 @@ const useUrlData = defineStore("main", {
     addstartDelta(data: startDeltaT) {
       this.startDelta = data
     },
-    wait(url: string) {
-      
-      this.pushLogText(`${timeNow()} Sleeping till next game`)
-      this.timerRunning = true;
-      this.startDelta.timer = 0;
-      const interval = setInterval(() => {
-        if(this.startDelta.fake > 0){
-          this.startDelta.fake--;
-          this.startDelta.timer++
-        }else{
-          clearInterval(interval);
-          this.timerRunning = false;
-          this.getSpin(url)
-        }
-      }, 1000);
+    addUrlText(data: string) {
+      this.urlText = data
     },
     pushLogText(data: string) {
       this.logText.push(data)

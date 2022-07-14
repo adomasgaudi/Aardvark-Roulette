@@ -1,5 +1,24 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
+import { useUrlData } from "./utils/stores/useUrlData";
+import { onMounted } from "vue";
+
+const main = useUrlData();
+
+onMounted(() => {
+  const wait = (url: string) => {
+    setInterval(() => {
+      if (main.startDelta.fake > 0) {
+        main.startDelta.fake--;
+        main.startDelta.timer++;
+      } else {
+        main.timerRunning = false;
+        main.getSpin(url);
+      }
+    }, 1000);
+  };
+  wait(main.urlText);
+});
 </script>
 
 <template>

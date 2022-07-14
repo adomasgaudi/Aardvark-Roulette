@@ -12,6 +12,7 @@ onMounted(() => {
   form.value.addEventListener("submit", (e: any) => {
     e.preventDefault();
     main.getGame(url2.value);
+    main.addUrlText(url2.value);
   });
 });
 </script>
